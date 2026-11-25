@@ -24,7 +24,7 @@ public class Grasshopper {
         int lenFrogTongue = Integer.parseInt(strok1[3]); // язык лягухи
 
         // Ищем первую точку (по порядку прыжков), где расстояние <= L
-        OptionalInt dangerStep = IntStream.range(0, kolJumps) // хранит либо пусто (не съела), либо число(съела)
+        OptionalInt jump = IntStream.range(0, kolJumps) // хранит либо пусто (не съела), либо число(съела)
                 .filter(i -> {
                     String[] coords = strok.get(i + 1).split("\\s+"); // строчка с координатами
                     int jumpX = Integer.parseInt(coords[0]); // прыгнул кузнечик
@@ -37,8 +37,8 @@ public class Grasshopper {
                 .findFirst();
 
         // Формируем ответ
-        String result = dangerStep.isPresent() // если есть int значение
-                ? String.valueOf(dangerStep.getAsInt()) // допрыгался - съела
+        String result = jump.isPresent() // если есть int значение
+                ? String.valueOf(jump.getAsInt()) // допрыгался - съела
                 : "Yes";
 
         // (посмотреть)
